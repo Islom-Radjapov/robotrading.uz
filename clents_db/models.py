@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Database1(models.Model):
+class Database(models.Model):
     login = models.CharField(max_length=120)
     date = models.DateTimeField()
     name = models.CharField(max_length=255)

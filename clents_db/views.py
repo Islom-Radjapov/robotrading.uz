@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Database
 
 def encode(login):
     result = ""
@@ -25,10 +27,9 @@ def encode(login):
             result += "a"
     return result
 
-from django.http import HttpResponse
-from .models import Database1
+
 
 def my_view(request):
-    data = Database1.objects.all()
-    output = '_'.join([f"{encode(d.login)}-{str(d.date).replace('-', '.')[:16]}" for d in data])
+    data = Database.objects.all()
+    output = '_'.join([f"{encode(d.login)}-{encode(str(d.date.year))}.{encode(str(d.date.month))}.{encode(str(d.date.day))}" for d in data])
     return HttpResponse(output)
