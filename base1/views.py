@@ -30,22 +30,5 @@ from .models import Database1
 
 def my_view(request):
     data = Database1.objects.all()
-    output = '_'.join([f"{encode(d.login)}-{str(d.date).replace('-', '.')}" for d in data])
-
+    output = '_'.join([f"{encode(d.login)}-{str(d.date).replace('-', '.')[:16]}" for d in data])
     return HttpResponse(output)
-
-
-# from django.http import HttpResponse
-# from .models import Database1
-#
-#
-# def my_view(request):
-#     data = Database1.objects.all()
-#     rows = []
-#     for d in data:
-#         row = f"<tr><td>{d.name}</td><td>{d.date}</td></tr>"
-#         rows.append(row)
-#     headers = "<tr><th>Name</th><th>Date</th></tr>"
-#
-#     table = f"<table>{headers}{''.join(rows)}</table>"
-#     return HttpResponse(table)
